@@ -57,6 +57,9 @@
       (< n 100) (handle-tens n)
       (< n 1000) (handle-group n 100 "hundred")
       (< n 1000000) (handle-group n 1000 "thousand")
+      (< n 1000000000) (handle-group n 1000000 "million")
+      (< n 1000000000000) (handle-group n 1000000000 "billion")
+      (< n 1000000000000000) (handle-group n 1000000000000 "trillion")
       :else n)))
 
 (defn -main
