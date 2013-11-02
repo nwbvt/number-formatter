@@ -30,6 +30,16 @@
     (is (= "Eleven billion" (num-format 11000000000)))
     (is (= "Sixteen trillion" (num-format 16000000000000)))))
 
+(deftest test-decimals
+  (testing "That decimals work"
+    (is (= "5/10" (num-format 0.5M)))
+    (is (= "Six and 2/10" (num-format 6.2M)))
+    (is (= "Ten and 2/100" (num-format 10.02M)))
+    (is (= "Three hundred twenty-two and 16/100" (num-format 322.16M)))
+    (is (= "Eighteen and 123456789/1000000000" (num-format 18.123456789M)))))
+
 (deftest test-negatives
   (testing "Test that negative numbers work"
-    (is (= "Negative three hundred" (num-format -300)))))
+    (is (= "Negative three hundred" (num-format -300)))
+    (is (= "Negative 5/10" (num-format -0.5M)))
+    (is (= "Negative six and 2/10" (num-format -6.2M)))))

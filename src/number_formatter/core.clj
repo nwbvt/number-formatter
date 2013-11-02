@@ -16,6 +16,7 @@
                 12 "twelve"
                 13 "thirteen"
                 15 "fifteen"
+                18 "eighteen"
                 20 "twenty"
                 30 "thirty"
                 40 "fourty"
@@ -51,13 +52,38 @@
   [n]
   (str "Negative " (num-format (* -1 n))))
 
+(defn- has-fractional?
+  "Does this number have a fractional part?"
+  [n]
+  (and
+    (= java.math.BigDecimal (type n))
+    (not (== n (.toBigInteger n)))))
+
+(defn- handle-decimal
+  "Handle a decimal part of a number"
+  [n]
+  (let [digits (* -1 (Math/log10 (.ulp n)))
+        numer (.movePointRight n digits)
+        denom (.movePointRight 1M digits)]
+    (str numer "/" denom)))
+
+(defn- handle-non-integer
+  "Handle numbers with fractional parts"
+  [n]
+  (let [int-part (.intValue n)
+        decimal-part (- n int-part)]
+    (str (if (> int-part 0)
+           (str (num-format (.longValue n)) " and "))
+         (handle-decimal decimal-part))))
+
 (defn num-format
   "Formats the number input into a string representation"
   [n]
   (string/capitalize
     (cond
       (contains? constants n) (constants n)
-      (< n 0) (handle-negative n)
+      (neg? n) (handle-negative n)
+      (has-fractional? n) (handle-non-integer n)
       (< n 20) (handle-teen n)
       (< n 100) (handle-tens n)
       (< n 1000) (handle-group n 100 "hundred")
@@ -70,4 +96,4 @@
 (defn -main
   "Main execution of the program"
   [input]
-  (println (num-format (Double/parseDouble input))))
+  (println (num-format (BigDecimal. input))))
