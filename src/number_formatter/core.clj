@@ -39,19 +39,13 @@
         ones (mod n 10)]
     (str (num-format tens) "-" (num-format ones))))
 
-(defn- handle-hundreds
-  "Handle numbers in the hundreds"
-  [n]
-  (let [hundreds (int (/ n 100))
-        remaining (mod n 100)]
-    (str (num-format hundreds) " hundred" (if (> remaining 0) (str " " (num-format remaining))))))
+(defn- handle-group
+  "Handle some group of numbers, such as hundreds, thousands, millions, etc"
+  [n split label]
+  (let [upper (int (/ n split))
+        remaining (mod n split)]
+    (str (num-format upper ) " " label (if (> remaining 0) (str " " (num-format remaining))))))
 
-(defn- handle-thousands
-  "Handle numbers in the thousands"
-  [n]
-  (let [thousands (int (/ n 1000))
-        remaining (mod n 1000)]
-    (str (num-format thousands) " thousand" (if (> remaining 0) (str " " (num-format remaining))))))
 
 (defn num-format
   "Formats the number input into a string representation"
@@ -61,8 +55,8 @@
       (contains? constants n) (constants n)
       (< n 20) (handle-teen n)
       (< n 100) (handle-tens n)
-      (< n 1000) (handle-hundreds n)
-      (< n 1000000) (handle-thousands n)
+      (< n 1000) (handle-group n 100 "hundred")
+      (< n 1000000) (handle-group n 1000 "thousand")
       :else n)))
 
 (defn -main
