@@ -24,17 +24,26 @@
                 80 "eighty"
                 90 "ninety"})
 
+(declare num-format)
+
 (defn- handle-teen
   "Teens are a bit wierd"
   [n]
-  (str (constants (- n 10)) "teen"))
+  (str (num-format (- n 10)) "teen"))
 
 (defn- handle-tens
   "Handle numbers between 21 to 99"
   [n]
   (let [tens (* (int (/ n 10)) 10)
         ones (mod n 10)]
-    (str (constants tens) "-" (constants ones))))
+    (str (num-format tens) "-" (num-format ones))))
+
+(defn- handle-hundreds
+  "Handle numbers in the hundreds"
+  [n]
+  (let [hundreds (int (/ n 100))
+        remaining (mod n 100)]
+    (str (num-format hundreds) " hundred " (num-format remaining))))
 
 (defn num-format
   "Formats the number input into a string representation"
@@ -44,6 +53,7 @@
       (contains? constants n) (constants n)
       (< n 20) (handle-teen n)
       (< n 100) (handle-tens n)
+      (< n 1000) (handle-hundreds n)
       :else n)))
 
 (defn -main
