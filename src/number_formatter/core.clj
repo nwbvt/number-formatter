@@ -1,4 +1,5 @@
 (ns number-formatter.core
+  (:gen-class :main true)
   (:require [clojure.string :as string]))
 
 (def constants {0 "zero"
