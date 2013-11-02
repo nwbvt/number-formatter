@@ -1,6 +1,11 @@
 (ns number-formatter.core)
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn num-format
+  "Formats the number input into a string representation"
+  [n]
+  (str n))
+
+(defn -main
+  "Main execution of the program"
+  [input]
+  (println (num-format (Double/parseDouble input))))
