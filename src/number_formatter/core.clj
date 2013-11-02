@@ -32,11 +32,13 @@
 (defn- handle-teen
   "Teens are a bit wierd"
   [n]
+  (assert (< n 20))
   (str (num-format (- n 10)) "teen"))
 
 (defn- handle-tens
   "Handle numbers between 21 to 99"
   [n]
+  (assert (< n 100))
   (let [tens (* (int (/ n 10)) 10)
         ones (mod n 10)]
     (str (num-format tens) "-" (num-format ones))))
@@ -51,6 +53,7 @@
 (defn- handle-negative
   "Handle negative numbers"
   [n]
+  (assert (< n 0))
   (str "Negative " (num-format (* -1 n))))
 
 (defn- has-fractional?
