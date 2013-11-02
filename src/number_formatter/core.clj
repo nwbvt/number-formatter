@@ -63,9 +63,10 @@
   "Handle a decimal part of a number"
   [n]
   (let [digits (* -1 (Math/log10 (.ulp n)))
-        numer (.movePointRight n digits)
-        denom (.movePointRight 1M digits)]
-    (str numer "/" denom)))
+        numer (long (.movePointRight n digits))
+        denom (long (.movePointRight 1M digits))
+        format-string (str "%0" (int digits) "d/%d")]
+    (format format-string numer denom)))
 
 (defn- handle-non-integer
   "Handle numbers with fractional parts"

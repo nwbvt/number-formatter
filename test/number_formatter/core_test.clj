@@ -34,12 +34,16 @@
   (testing "That decimals work"
     (is (= "5/10" (num-format 0.5M)))
     (is (= "Six and 2/10" (num-format 6.2M)))
-    (is (= "Ten and 2/100" (num-format 10.02M)))
+    (is (= "Ten and 02/100" (num-format 10.02M)))
     (is (= "Three hundred twenty-two and 16/100" (num-format 322.16M)))
     (is (= "Eighteen and 123456789/1000000000" (num-format 18.123456789M)))))
 
 (deftest test-negatives
-  (testing "Test that negative numbers work"
+  (testing "That negative numbers work"
     (is (= "Negative three hundred" (num-format -300)))
     (is (= "Negative 5/10" (num-format -0.5M)))
     (is (= "Negative six and 2/10" (num-format -6.2M)))))
+
+(deftest test-example
+  (testing "That the given example works (since it would be kinda embarrassing if it did not)"
+    (is (= "Two thousand five hundred twenty-three and 04/100" (num-format 2523.04M)))))
