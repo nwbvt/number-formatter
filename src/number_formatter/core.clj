@@ -1,7 +1,8 @@
 (ns number-formatter.core
   (:require [clojure.string :as string]))
 
-(def constants {1 "one"
+(def constants {0 "zero"
+                1 "one"
                 2 "two"
                 3 "three"
                 4 "four"
@@ -43,7 +44,14 @@
   [n]
   (let [hundreds (int (/ n 100))
         remaining (mod n 100)]
-    (str (num-format hundreds) " hundred " (num-format remaining))))
+    (str (num-format hundreds) " hundred" (if (> remaining 0) (str " " (num-format remaining))))))
+
+(defn- handle-thousands
+  "Handle numbers in the thousands"
+  [n]
+  (let [thousands (int (/ n 1000))
+        remaining (mod n 1000)]
+    (str (num-format thousands) " thousand" (if (> remaining 0) (str " " (num-format remaining))))))
 
 (defn num-format
   "Formats the number input into a string representation"
@@ -54,6 +62,7 @@
       (< n 20) (handle-teen n)
       (< n 100) (handle-tens n)
       (< n 1000) (handle-hundreds n)
+      (< n 1000000) (handle-thousands n)
       :else n)))
 
 (defn -main
