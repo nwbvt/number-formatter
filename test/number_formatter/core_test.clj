@@ -2,8 +2,9 @@
   (:require [clojure.test :refer :all]
             [number-formatter.core :refer :all]))
 
-(deftest test-formatter
-  (testing "Test that the formatter returns as expected"
+(deftest test-positive-integers
+  (testing "Test that the formatter returns as expected for positive integers"
+    (is (= "Zero" (num-format 0)))
     (is (= "One" (num-format 1)))
     (is (= "Eleven" (num-format 11)))
     (is (= "Fourteen" (num-format 14)))
@@ -25,8 +26,10 @@
     (is (= "Seven hundred fourty-five thousand two hundred sixteen" (num-format 745216)))
     (is (= "Nine million" (num-format 9000000)))
     (is (= "Twelve million three hundred twenty-two thousand six hundred fourteen" (num-format 12322614)))
-    (is (= "Eight hundred seventy-six million five hundred twenty-three thousand four hundred twelve" 
-           (num-format 876523412)))
+    (is (= "Eight hundred seventy-six million five hundred twenty-three thousand four hundred twelve" (num-format 876523412)))
     (is (= "Eleven billion" (num-format 11000000000)))
-    (is (= "Sixteen trillion" (num-format 16000000000000)))
-           ))
+    (is (= "Sixteen trillion" (num-format 16000000000000)))))
+
+(deftest test-negatives
+  (testing "Test that negative numbers work"
+    (is (= "Negative three hundred" (num-format -300)))))

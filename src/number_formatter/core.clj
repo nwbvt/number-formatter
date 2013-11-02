@@ -46,6 +46,10 @@
         remaining (mod n split)]
     (str (num-format upper ) " " label (if (> remaining 0) (str " " (num-format remaining))))))
 
+(defn- handle-negative
+  "Handle negative numbers"
+  [n]
+  (str "Negative " (num-format (* -1 n))))
 
 (defn num-format
   "Formats the number input into a string representation"
@@ -53,6 +57,7 @@
   (string/capitalize
     (cond
       (contains? constants n) (constants n)
+      (< n 0) (handle-negative n)
       (< n 20) (handle-teen n)
       (< n 100) (handle-tens n)
       (< n 1000) (handle-group n 100 "hundred")
