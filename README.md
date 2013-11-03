@@ -1,6 +1,8 @@
 # number-formatter
 
-A Clojure app for printing out the English form of numbers up to 1E45-1
+A Clojure app for printing out the (American) English form of numbers up to 1E63-1
+Note: This is using the American number system, as defined http://www.merriam-webster.com/table/dict/number.htm
+No milliards or crazy upping names every 10^6, for those more used to the European number systems
 
 ## Usage
 
