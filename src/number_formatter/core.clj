@@ -2,39 +2,12 @@
   (:gen-class :main true)
   (:require [clojure.string :as string]))
 
-(def constants {0N "zero"
-                1N "one"
-                2N "two"
-                3N "three"
-                4N "four"
-                5N "five"
-                6N "six"
-                7N "seven"
-                8N "eight"
-                9N "nine"
-                10N "ten"
-                11N "eleven"
-                12N "twelve"
-                13N "thirteen"
-                15N "fifteen"
-                18N "eighteen"
-                20N "twenty"
-                30N "thirty"
-                40N "fourty"
-                50N "fifty"
-                60N "sixty"
-                70N "seventy"
-                80N "eighty"
-                90N "ninety"})
+(def constants {0N "zero", 1N "one", 2N "two", 3N "three", 4N "four", 5N "five", 6N "six", 7N "seven", 8N "eight",
+                9N "nine", 10N "ten", 11N "eleven", 12N "twelve", 13N "thirteen", 14N "fourteen", 15N "fifteen",
+                16N "sixteen", 17N "seventeen", 18N "eighteen", 19N "nineteen", 20N "twenty", 30N "thirty",
+                40N "fourty", 50N "fifty", 60N "sixty", 70N "seventy", 80N "eighty", 90N "ninety"})
 
 (declare num-format)
-
-(defn- handle-teen
-  "Teens are a bit wierd"
-  [n]
-  (assert (> n 10))
-  (assert (< n 20))
-  (str (num-format (- n 10)) "teen"))
 
 (defn- handle-tens
   "Handle numbers between 21 to 99"
@@ -91,7 +64,6 @@
       (neg? n) (handle-negative n)
       (has-fractional? n) (handle-non-integer n)
       (contains? constants (.toBigInteger n)) (constants (.toBigInteger n))
-      (< n 20) (handle-teen n)
       (< n 100) (handle-tens n)
       (< n 1000) (handle-group n 100 "hundred")
       (< n 1E6M) (handle-group n 1000 "thousand")
