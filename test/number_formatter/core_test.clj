@@ -47,3 +47,9 @@
 (deftest test-example
   (testing "That the given example works (since it would be kinda embarrassing if it did not)"
     (is (= "Two thousand five hundred twenty-three and 04/100" (num-format 2523.04M)))))
+
+(deftest test-biggies
+  (testing "Test some really big values as well"
+    (is (= "One octillion two hundred twenty-three and 04/100" (num-format (+ 1E27M 223.04M))))
+    (is (.startsWith (num-format (- 6E30M 1M)) "Five nonillion"))
+    (is (= "Negative six nonillion and 014/1000" (num-format (- -6E30M 0.014M))))))
