@@ -108,6 +108,12 @@
       (< n 1E39M) (handle-group n 1E36M "undecillion")
       (< n 1E42M) (handle-group n 1E39M "duodecillion")
       (< n 1E45M) (handle-group n 1E42M "tredecillion")
+      (< n 1E48M) (handle-group n 1E45M "quattuordecillion")
+      (< n 1E51M) (handle-group n 1E48M "quindecillion")
+      (< n 1E54M) (handle-group n 1E51M "sexdecillion")
+      (< n 1E57M) (handle-group n 1E54M "septdecillion")
+      (< n 1E60M) (handle-group n 1E57M "octodecillion")
+      (< n 1E63M) (handle-group n 1E60M "vigintillion")
       :else n)))
 
 (defn -main
