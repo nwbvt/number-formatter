@@ -31,7 +31,7 @@
   (assert (< n 0))
   (str "Negative " (num-format (* -1 n))))
 
-(defn- has-fractional?
+(defn- has-decimal?
   "Does this number have a fractional part?"
   [n]
   (and
@@ -62,7 +62,7 @@
   (string/capitalize
     (cond
       (neg? n) (handle-negative n)
-      (has-fractional? n) (handle-non-integer n)
+      (has-decimal? n) (handle-non-integer n)
       (contains? constants (.toBigInteger n)) (constants (.toBigInteger n))
       (< n 100) (handle-tens n)
       (< n 1000) (handle-group n 100 "hundred")
