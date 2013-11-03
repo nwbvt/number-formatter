@@ -2,10 +2,10 @@
   (:gen-class :main true)
   (:require [clojure.string :as string]))
 
-(def constants {0N "zero", 1N "one", 2N "two", 3N "three", 4N "four", 5N "five", 6N "six", 7N "seven", 8N "eight",
-                9N "nine", 10N "ten", 11N "eleven", 12N "twelve", 13N "thirteen", 14N "fourteen", 15N "fifteen",
-                16N "sixteen", 17N "seventeen", 18N "eighteen", 19N "nineteen", 20N "twenty", 30N "thirty",
-                40N "fourty", 50N "fifty", 60N "sixty", 70N "seventy", 80N "eighty", 90N "ninety"})
+(def constants {0 "zero", 1 "one", 2 "two", 3 "three", 4 "four", 5 "five", 6 "six", 7 "seven", 8 "eight",
+                9 "nine", 10 "ten", 11 "eleven", 12 "twelve", 13 "thirteen", 14 "fourteen", 15 "fifteen",
+                16 "sixteen", 17 "seventeen", 18 "eighteen", 19 "nineteen", 20 "twenty", 30 "thirty",
+                40 "fourty", 50 "fifty", 60 "sixty", 70 "seventy", 80 "eighty", 90 "ninety"})
 
 (declare num-format)
 
